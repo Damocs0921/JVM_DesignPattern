@@ -1,0 +1,34 @@
+
+ThreadLocal 相当于存某个线程专属的对象的地方 配合线程池池复用
+ThreadLocalMap是统一的
+是一个表private Map values = Collections.synchronizedMap(new HashMap());
+存线程和ThreadLocal的对应关系
+
+https://blog.csdn.net/qq_21996541/article/details/79796117
+PageHelper首先将前端传递的参数保存到page这个对象中，
+接着将page的副本存放入ThreadLocal中，这样可以保证分页的时候，参数互不影响，
+接着利用了mybatis提供的拦截器，取得ThreadLocal的值，重新拼装分页SQL，完成分页。
+全局xml配置
+<plugins>
+    <plugin interceptor="org.format.mybatis.cache.interceptor.ExamplePlugin"></plugin>
+</plugins>
+这样把interceptor传给mybatis的
+
+
+///
+class MyTread extends Thread
+class MyRunnable implements Runnable
+线程池 ThreadPoolTaskExecutor
+
+//
+注解？？
+
+
+
+
+
+
+工具：
+
+CheckStyle静态检查
+
