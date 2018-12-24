@@ -14,11 +14,48 @@ PageHelper首先将前端传递的参数保存到page这个对象中，
 </plugins>
 这样把interceptor传给mybatis的
 
-
 ///
 class MyTread extends Thread
 class MyRunnable implements Runnable
-线程池 ThreadPoolTaskExecutor
+线程池 ThreadPoolTaskExecutor 
+https://mp.weixin.qq.com/s/-89-CcDnSLBYy3THmcLEdQ
+https://zhuanlan.zhihu.com/p/32867181
+线程池原理关键技术：锁（lock,cas）、阻塞队列、hashSet（资源池）
+
+核心池->队列->最大池
+线程池不允许使用 Executors 去创建，而是通过 ThreadPoolExecutor的方式，这样 的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。	说明： Executors 返回的线程池对象的弊端如下：	1） FixedThreadPool 和 SingleThreadPool :	允许的请求队列长度为 Integer.MAX_VALUE ，可能会堆积大量的请求，从而导致 OOM 。	2） CachedThreadPool 和 ScheduledThreadPool :	允许的创建线程数量为 Integer.MAX_VALUE ，可能会创建大量的线程，从而导致 OOM 。
+
+//这样就行了
+public static void main(String[] args) throws Exception {
+        ExecutorService executorService = new ThreadPoolExecutor(1, 1,
+                60L, TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(10));
+
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("abcdefg");
+            }
+        });
+
+        executorService.shutdown();
+    }
+
+SimpleDateFormat不线程安全
+
+//枚举
+public enum SeasonEnum {
+   SPRING(1), SUMMER(2), AUTUMN(3), WINTER(4);
+   private int seq;
+   SeasonEnum(int seq){
+       this.seq = seq;
+   }
+}
+
+日志用slf4j 这样打：
+//如果Debug等级没有开启，则不会产生不必要的字符串，同时也能保持程序编码的简洁
+logger.debug("There are now {} user accounts: {}", count, userAccountList); 
+//传统的字符串产生方式，如果没有要记录Debug等级的信息，就会浪费时间在产生不必要的信息上
 
 //
 注解？？
