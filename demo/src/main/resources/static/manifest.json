@@ -1,0 +1,17 @@
+{
+  "orientation": "portrait-primary",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon_200x200.png",
+      "sizes": "200x200",
+      "type": "image/png"
+    }
+  ],
+  "name": "K米商户通",
+  "short_name": "K米商户通",
+  "description": "",
+  "start_url": "/",
+  "background_color": "#2d8cf0",
+  "theme_color": "#2d8cf0"
+}
